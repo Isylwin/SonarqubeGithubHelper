@@ -1,17 +1,22 @@
 package UI;
 
-import Classes.MessageBox;
-import Interfaces.PersistencyHandler;
+import Interfaces.UserInterfaceMediator;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainWindowController {
+public class MainWindowController implements Initializable, UserInterfaceMediator {
+
     @FXML
     private TextField txtSonarScanner;
     @FXML
@@ -35,7 +40,15 @@ public class MainWindowController {
     @FXML
     private CheckBox chkSonarQubeRemind;
 
-    private PersistencyHandler handler;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        pwfGithubToken.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
+
+            }
+        });
+    }
 
     @FXML
     private void openFileDialog(ActionEvent event) {
@@ -48,31 +61,82 @@ public class MainWindowController {
         txtSonarScanner.setText(sonarScanner.getAbsolutePath());
     }
 
-    public void setPersistencyHandler(PersistencyHandler handler) {
-        this.handler = handler;
+    private void fillRepositoryComboBox(ObservableList repos) {
+        cmbGithubRepository.setItems(repos);
     }
 
-    public void loadFromPersistency() {
-        txtSonarScanner.setText(handler.getSonarScannerLocation());
-        txtSonarQubeServerIP.setText(handler.getSonarQubeServerIP());
-        txtSonarQubeServerPort.setText(handler.getSonarQubeServerPort());
-        pwfGithubToken.setText(handler.getGithubToken());
-        pwfSonarQubeToken.setText(handler.getSonarQubeToken());
-
-        chkGithubRemind.setSelected(!pwfGithubToken.getText().equals(""));
-        chkSonarQubeRemind.setSelected(!pwfSonarQubeToken.getText().equals(""));
+    @Override
+    public String getGithubToken() {
+        return pwfGithubToken.getText();
     }
 
-    public void saveToPersistency() {
-        try {
-            handler.setGithubToken(pwfGithubToken.getText());
-            handler.setSonarQubeToken(pwfSonarQubeToken.getText());
-            handler.setSonarQubeServerIP(txtSonarQubeServerIP.getText());
-            handler.setSonarQubeServerPort(txtSonarQubeServerPort.getText());
-            handler.setSonarScannerLocation(txtSonarScanner.getText());
-        } catch (IOException e) {
-            e.printStackTrace(System.err);
-            MessageBox.show(e.getMessage(), "Exception", Alert.AlertType.ERROR);
-        }
+    @Override
+    public void setGithubToken(String value) {
+        pwfGithubToken.setText(value);
+    }
+
+    @Override
+    public String getSonarQubeToken() {
+        return pwfSonarQubeToken.getText();
+    }
+
+    @Override
+    public void setSonarQubeToken(String value) {
+        pwfSonarQubeToken.setText(value);
+    }
+
+    @Override
+    public String getSonarScannerLocation() {
+        return txtSonarScanner.getText();
+    }
+
+    @Override
+    public void setSonarScannerLocation(String value) {
+        txtSonarScanner.setText(value);
+    }
+
+    @Override
+    public String getSonarQubeServerIP() {
+        return txtSonarQubeServerIP.getText();
+    }
+
+    @Override
+    public void setSonarQubeServerIP(String value) {
+        txtSonarQubeServerIP.setText(value);
+    }
+
+    @Override
+    public String getSonarQubeServerPort() {
+        return txtSonarQubeServerPort.getText();
+    }
+
+    @Override
+    public void setSonarQubeServerPort(String value) {
+        txtSonarQubeServerPort.setText(value);
+    }
+
+    @Override
+    public boolean getGithubTokenRemind() {
+        return chkGithubRemind.isSelected();
+    }
+
+    @Override
+    public void setGithubTokenRemind(boolean value) {
+        chkGithubRemind.setSelected(value);
+    }
+
+    @Override
+    public boolean getSonarQubeTokenRemind() {
+        return chkSonarQubeRemind.isSelected();
+    }
+
+    @Override
+    public void setSonarQubeTokenRemind(boolean value) {
+        chkSonarQubeRemind.setSelected(value);
+    }
+
+    @Override
+    public void popUpErrorMessage(String message, String title) {
+        MessageBox.show(message, title, Alert.AlertType.ERROR);
     }
 }

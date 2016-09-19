@@ -6,36 +6,38 @@
 <Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
       minWidth="-Infinity" prefHeight="320.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/8"
       fx:controller="UI.MainWindowController">
-    <Button id="btnBrowseSonarScanner" fx:id="btnBrowseSonarScanner" layoutX="218.0" layoutY="37.0"
-            mnemonicParsing="false" onAction="#openFileDialog" text="Browse..."/>
-    <TextField id="txtSonarScanner" fx:id="txtSonarScanner" layoutX="14.0" layoutY="37.0" prefHeight="25.0"
-               prefWidth="188.0" promptText="C:\sonar-scanner-2.7\bin\sonar-scanner.bat"/>
-    <Label layoutX="14.0" layoutY="14.0" text="Sonar Scanner File Path"/>
-    <TextField id="txtSonarQubeServer" fx:id="txtSonarQubeServerIP" layoutX="14.0" layoutY="97.0" prefHeight="25.0"
-               prefWidth="124.0" promptText="localhost"/>
-    <Label layoutX="14.0" layoutY="74.0" text="SonarQube Server Adress"/>
-    <Label layoutX="14.0" layoutY="137.0" text="Repository"/>
-    <ComboBox id="cmbGithubRepository" fx:id="cmbGithubRepository" layoutX="14.0" layoutY="160.0" prefHeight="25.0"
-              prefWidth="188.0"/>
-    <ComboBox id="cmbPullRequest" fx:id="cmbGithubPullRequest" layoutX="14.0" layoutY="224.0" prefHeight="25.0"
-              prefWidth="188.0"/>
-    <Label layoutX="14.0" layoutY="200.0" text="Pull Request"/>
-    <Button id="btnGo" fx:id="btnGo" layoutX="14.0" layoutY="281.0" mnemonicParsing="false" text="Go"/>
-    <PasswordField id="pwfGithubToken" fx:id="pwfGithubToken" layoutX="316.0" layoutY="97.0" prefHeight="25.0"
-                   prefWidth="194.0"/>
-    <Label layoutX="316.0" layoutY="74.0" text="Github Token"/>
-    <Label layoutX="316.0" layoutY="137.0" text="SonarQube Token"/>
-    <PasswordField id="pwfSonarQubeToken" fx:id="pwfSonarQubeToken" layoutX="316.0" layoutY="160.0" prefHeight="25.0"
-                   prefWidth="194.0"/>
-    <CheckBox id="chkGithubRemind" fx:id="chkGithubRemind" layoutX="437.0" layoutY="129.0" mnemonicParsing="false"
-              text="Remind token"/>
-    <CheckBox id="chkSonarQubeRemind" fx:id="chkSonarQubeRemind" layoutX="437.0" layoutY="192.0" mnemonicParsing="false"
-              text="Remind token"/>
-    <TextField id="txtSonarQubeServer" fx:id="txtSonarQubeServerPort" layoutX="152.0" layoutY="97.0" prefHeight="25.0"
-               prefWidth="46.0" promptText="8080"/>
-    <Label layoutX="143.0" layoutY="94.0" text=":">
-        <font>
-            <Font size="18.0"/>
-        </font>
-    </Label>
+    <children>
+        <Button id="btnBrowseSonarScanner" fx:id="btnBrowseSonarScanner" layoutX="218.0" layoutY="37.0"
+                mnemonicParsing="false" onAction="#openFileDialog" text="Browse..."/>
+        <TextField id="txtSonarScanner" fx:id="txtSonarScanner" layoutX="14.0" layoutY="37.0" prefHeight="25.0"
+                   prefWidth="188.0" promptText="C:\sonar-scanner-2.7\bin\sonar-scanner.bat"/>
+        <Label layoutX="14.0" layoutY="14.0" text="Sonar Scanner File Path"/>
+        <TextField id="txtSonarQubeServer" fx:id="txtSonarQubeServerIP" layoutX="14.0" layoutY="97.0" prefHeight="25.0"
+                   prefWidth="124.0" promptText="localhost"/>
+        <Label layoutX="14.0" layoutY="74.0" text="SonarQube Server Adress"/>
+        <Label layoutX="14.0" layoutY="137.0" text="Repository"/>
+        <ComboBox id="cmbGithubRepository" fx:id="cmbGithubRepository" layoutX="14.0" layoutY="160.0" prefHeight="25.0"
+                  prefWidth="188.0"/>
+        <ComboBox id="cmbPullRequest" fx:id="cmbGithubPullRequest" layoutX="14.0" layoutY="224.0" prefHeight="25.0"
+                  prefWidth="188.0"/>
+        <Label layoutX="14.0" layoutY="200.0" text="Pull Request"/>
+        <Button id="btnGo" fx:id="btnGo" layoutX="14.0" layoutY="281.0" mnemonicParsing="false" text="Go"/>
+        <PasswordField id="pwfGithubToken" fx:id="pwfGithubToken" layoutX="316.0" layoutY="97.0" prefHeight="25.0"
+                       prefWidth="194.0"/>
+        <Label layoutX="316.0" layoutY="74.0" text="Github Token"/>
+        <Label layoutX="316.0" layoutY="137.0" text="SonarQube Token"/>
+        <PasswordField id="pwfSonarQubeToken" fx:id="pwfSonarQubeToken" layoutX="316.0" layoutY="160.0"
+                       prefHeight="25.0" prefWidth="194.0"/>
+        <CheckBox id="chkGithubRemind" fx:id="chkGithubRemind" layoutX="437.0" layoutY="129.0" mnemonicParsing="false"
+                  text="Remind token"/>
+        <CheckBox id="chkSonarQubeRemind" fx:id="chkSonarQubeRemind" layoutX="437.0" layoutY="192.0"
+                  mnemonicParsing="false" text="Remind token"/>
+        <TextField id="txtSonarQubeServer" fx:id="txtSonarQubeServerPort" layoutX="152.0" layoutY="97.0"
+                   prefHeight="25.0" prefWidth="46.0" promptText="8080"/>
+        <Label layoutX="143.0" layoutY="94.0" text=":">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+    </children>
 </Pane>

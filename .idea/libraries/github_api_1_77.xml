@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="github-api-1.77">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/github-api-1.77.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jackson-annotations-2.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jackson-core-2.2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jackson-databind-2.2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/commons-codec-1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/commons-io-1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/commons-lang-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bridge-method-annotation-1.14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/annotations.jar!/" />
+      <root url="jar://$PROJECT_DIR$/findbugs.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/annotations.jar!/" />
+    </SOURCES>
+  </library>
+</component>
