@@ -3,12 +3,18 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Controller {
     @FXML
     private TextField txtSonarScanner;
     @FXML
-    private TextField txtSonarQubeServer;
+    private TextField txtSonarQubeServerIP;
+    @FXML
+    private TextField txtSonarQubeServerPort;
     @FXML
     private Button btnBrowseSonarScanner;
     @FXML
@@ -28,6 +34,9 @@ public class Controller {
 
     @FXML
     private void openFileDialog(ActionEvent event) {
-
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        File sonarScanner = fileChooser.showOpenDialog(new Stage());
+        txtSonarScanner.setText(sonarScanner.getAbsolutePath());
     }
 }
