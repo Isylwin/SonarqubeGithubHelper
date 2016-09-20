@@ -3,6 +3,7 @@ package UI;
 import Classes.GithubHandler;
 import Classes.PropertiesHandler;
 import Interfaces.PersistencyHandler;
+import Interfaces.UIListener;
 import Interfaces.UserInterfaceMediator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class Main extends Application implements UIListener {
 
     private PersistencyHandler persistencyHandler;
     private UserInterfaceMediator mainUI;
@@ -30,6 +31,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
         Parent root = loader.load();
         mainUI = loader.getController();
+        mainUI.addListener(this);
 
         loadFromPersistency();
 
@@ -54,13 +56,7 @@ public class Main extends Application {
         if (!githubToken.equals("")) {
             mainUI.setGithubTokenRemind(true);
 
-            try {
-                githubHandler.connectToGithub(githubToken);
-            } catch (IOException e) {
-                e.printStackTrace(System.err);
-                mainUI.popUpErrorMessage(e.getMessage(), "Exception");
-            }
-
+            githubTokenChanged(githubToken);
             //fillRepositoryComboBox(null);
         }
     }
@@ -75,6 +71,30 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace(System.err);
             mainUI.popUpErrorMessage(e.getMessage(), "Exception");
+        }
+    }
+
+    @Override
+    public void githubTokenChanged(String token) {
+        if (token.length() < 40)
+            return;
+
+        try {
+            githubHandler.connectToGithub(token);
+
+            mainUI.fillRepositoryComboBox(githubHandler.getRepositories());
+        } catch (IOException e) {
+            e.printStackTrace(System.err);
+            mainUI.popUpErrorMessage(e.getMessage(), "Exception");
+        }
+    }
+
+    @Override
+    public void repositoryChanged(String repository) {
+        try {
+            mainUI.fillPullRequestComboBox(githubHandler.getPullRequests(repository));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

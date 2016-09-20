@@ -1,8 +1,10 @@
 package UI;
 
+import Interfaces.UIListener;
 import Interfaces.UserInterfaceMediator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +15,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable, UserInterfaceMediator {
@@ -40,12 +44,16 @@ public class MainWindowController implements Initializable, UserInterfaceMediato
     @FXML
     private CheckBox chkSonarQubeRemind;
 
+    private List<UIListener> listeners = new ArrayList<UIListener>();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pwfGithubToken.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
-
+                for (UIListener listener : listeners) {
+                    listener.githubTokenChanged(s2);
+                }
             }
         });
     }
@@ -61,8 +69,23 @@ public class MainWindowController implements Initializable, UserInterfaceMediato
         txtSonarScanner.setText(sonarScanner.getAbsolutePath());
     }
 
-    private void fillRepositoryComboBox(ObservableList repos) {
-        cmbGithubRepository.setItems(repos);
+    @FXML
+    private void repositoryComboBoxSelectedChange(ActionEvent event) {
+        for (UIListener listener : listeners) {
+            listener.repositoryChanged(cmbGithubRepository.getSelectionModel().getSelectedItem().toString());
+        }
+    }
+
+    @Override
+    public void fillRepositoryComboBox(List<String> repos) {
+        ObservableList<String> items = FXCollections.observableArrayList(repos);
+        cmbGithubRepository.setItems(items);
+    }
+
+    @Override
+    public void fillPullRequestComboBox(List<String> pullRequests) {
+        ObservableList<String> items = FXCollections.observableArrayList(pullRequests);
+        cmbGithubPullRequest.setItems(items);
     }
 
     @Override
@@ -138,5 +161,10 @@ public class MainWindowController implements Initializable, UserInterfaceMediato
     @Override
     public void popUpErrorMessage(String message, String title) {
         MessageBox.show(message, title, Alert.AlertType.ERROR);
+    }
+
+    @Override
+    public void addListener(UIListener listener) {
+        listeners.add(listener);
     }
 }
