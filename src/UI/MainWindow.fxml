@@ -16,8 +16,8 @@
                    prefWidth="124.0" promptText="localhost"/>
         <Label layoutX="14.0" layoutY="74.0" text="SonarQube Server Adress"/>
         <Label layoutX="14.0" layoutY="137.0" text="Repository"/>
-        <ComboBox id="cmbGithubRepository" fx:id="cmbGithubRepository" layoutX="14.0" layoutY="160.0" prefHeight="25.0"
-                  prefWidth="188.0"/>
+        <ComboBox id="cmbGithubRepository" fx:id="cmbGithubRepository" layoutX="14.0" layoutY="160.0"
+                  onAction="#repositoryComboBoxSelectedChange" prefHeight="25.0" prefWidth="188.0"/>
         <ComboBox id="cmbPullRequest" fx:id="cmbGithubPullRequest" layoutX="14.0" layoutY="224.0" prefHeight="25.0"
                   prefWidth="188.0"/>
         <Label layoutX="14.0" layoutY="200.0" text="Pull Request"/>

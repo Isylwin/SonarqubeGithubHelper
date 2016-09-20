@@ -1,5 +1,7 @@
 package Interfaces;
 
+import java.util.List;
+
 /**
  * Created by Oscar on 19-9-2016.
  */
@@ -32,5 +34,11 @@ public interface UserInterfaceMediator {
 
     void setSonarQubeTokenRemind(boolean value);
 
+    void fillRepositoryComboBox(List<String> repositories);
+
+    void fillPullRequestComboBox(List<String> pullRequests);
+
     void popUpErrorMessage(String message, String title);
+
+    void addListener(UIListener listener);
 }
