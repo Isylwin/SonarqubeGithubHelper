@@ -39,7 +39,7 @@ public class GithubHandler {
         GHRepository repo = repos.get(repoName);
 
         List<GHPullRequest> requests = repo.getPullRequests(GHIssueState.OPEN);
-        requests.forEach(p -> pullRequests.put(p.getId() + "", p));
+        requests.forEach(p -> pullRequests.put(p.getNumber() + ":" + p.getTitle(), p));
 
         return pullRequests.keySet().stream().collect(Collectors.toList());
     }
