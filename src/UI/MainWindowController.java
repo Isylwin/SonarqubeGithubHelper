@@ -59,6 +59,11 @@ public class MainWindowController implements Initializable, UserInterfaceMediato
     }
 
     @FXML
+    private void btnGoOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
     private void openFileDialog(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
 

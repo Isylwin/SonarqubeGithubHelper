@@ -27,20 +27,27 @@ public class GithubHandler {
     public void connectToGithub(String oAuthToken) throws IOException {
         this.oAuthToken = oAuthToken;
         github = GitHub.connectUsingOAuth(oAuthToken);
-        List<GHRepository> repositories = github.getMyself().listRepositories().asList();
-        repositories.forEach(r -> repos.put(r.getFullName(), r));
     }
 
-    public List<String> getRepositories() {
+    public List<String> getRepositoriesNames() throws IOException {
+        getRepositoriesFromGithub();
         return repos.keySet().stream().collect(Collectors.toList());
     }
 
-    public List<String> getPullRequests(String repoName) throws IOException {
+    public List<String> getPullRequestsNames(String repoName) throws IOException {
+        getPullRequestsFromGithub(repoName);
+        return pullRequests.keySet().stream().collect(Collectors.toList());
+    }
+
+    private void getPullRequestsFromGithub(String repoName) throws IOException {
         GHRepository repo = repos.get(repoName);
 
         List<GHPullRequest> requests = repo.getPullRequests(GHIssueState.OPEN);
         requests.forEach(p -> pullRequests.put(p.getNumber() + ":" + p.getTitle(), p));
+    }
 
-        return pullRequests.keySet().stream().collect(Collectors.toList());
+    private void getRepositoriesFromGithub() throws IOException {
+        List<GHRepository> ghRepositories = github.getMyself().listRepositories().asList();
+        ghRepositories.forEach(r -> repos.put(r.getFullName(), r));
     }
 }
